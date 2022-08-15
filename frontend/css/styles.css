@@ -71,9 +71,12 @@ footer {
 
 .tile-text {
   position: absolute;
+  bottom: 5%;
   z-index: 1;
+  color: white;
   text-transform: uppercase;
   letter-spacing: 2px;
+  text-align: center;
 }
 .hero-image {
   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */

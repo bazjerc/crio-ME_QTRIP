@@ -111,33 +111,28 @@ footer {
 
 /* activity page css */
 
-.activity-card {
-  color: #000;
-  position: relative;
-  height: 350px;
-  /* width: calc(25% - 20px); */
-  /* padding: 6px; */
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  cursor: pointer;
-  -webkit-transition: 0.2s all;
-  overflow: hidden;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-}
-.activity-card img {
-  width: 100%;
+.adventure-card img {
+  /* TODO: MODULE_ADVENTURES_GRID */
+  /* 1. Fill in the required properties. */
+  position: absolute;
+  bottom: 0;
+  left: 0;
   height: 100%;
-  /* border-radius: 8px; */
-  -webkit-transition: 0.2s all;
-  /* -webkit-filter: brightness(70%); */
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: filter 0.1s ease-out;
 }
-.activity-card img:hover {
-  -webkit-filter: brightness(50%);
-  /* transform: scale(1.1); */
+
+.adventure-card img:hover {
+  /* TODO: MODULE_ADVENTURES_GRID */
+  /* 1. Fill in the required properties. */
+  filter: brightness(65%);
+}
+
+.adventure-card-img-con {
+  position: relative;
+  min-height: 260px;
 }
 
 /* activity-detail page css */
@@ -195,7 +190,7 @@ footer {
   right: 0;
   z-index: 1;
   margin-top: 16px;
-  margin-right: 8px;
+  margin-right: -3px;
   display: flex;
   justify-content: center;
   align-items: center;

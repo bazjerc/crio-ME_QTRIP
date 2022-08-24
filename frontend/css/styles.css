@@ -111,6 +111,11 @@ footer {
 
 /* activity page css */
 
+.empty {
+  text-align: center;
+  font-size: 30px;
+}
+
 .adventure-card img {
   /* TODO: MODULE_ADVENTURES_GRID */
   /* 1. Fill in the required properties. */
@@ -174,6 +179,9 @@ footer {
   border-radius: 20px;
   padding: 5px 20px;
   margin: 10px 10px 10px 0px;
+  /* OPTIONAL */
+  /* Clear single category */
+  cursor: pointer;
 }
 .category-banner {
   position: absolute;

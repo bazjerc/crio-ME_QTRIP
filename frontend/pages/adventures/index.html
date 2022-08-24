@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QTrip Adventures</title>
@@ -176,14 +176,28 @@
       function selectDuration(event) {
         // TODO: MODULE_FILTERS
         // 1. Change the DOM to show the selected duration filter. Use the provided input event
+        document.getElementById("data").textContent = "";
+        const duration = event.target.value;
+        filters.duration = duration;
+        let filteredAdventures = filterFunction(adventures, filters);
+        addAdventureToDOM(filteredAdventures);
+
         // 2. Invoke saveFiltersToLocalStorage here
+        saveFiltersToLocalStorage(filters);
       }
 
       //executed when clear button is clicked on duration filter dropdown
       function clearDuration(event) {
         // TODO: MODULE_FILTERS
         // 1. Change the DOM to clear the Duration filter. Refer clearCategory() below
+        document.getElementById("data").textContent = "";
+        filters.duration = "";
+        let filteredAdventures = filterFunction(adventures, filters);
+        addAdventureToDOM(filteredAdventures);
+        document.getElementById("duration-select").selectedIndex = 0;
+
         // 2. Invoke saveFiltersToLocalStorage here
+        saveFiltersToLocalStorage(filters);
       }
 
       //executed when onChange() is triggered on category filter dropdown
@@ -193,7 +207,6 @@
 
         let category = event.target.value;
         document.getElementById("category-select").selectedIndex = 0;
-
         filters["category"].push(category);
         filters["category"] = filters["category"].filter(onlyUnique);
 
@@ -201,8 +214,15 @@
         let filteredAdventures = filterFunction(adventures, filters);
         addAdventureToDOM(filteredAdventures);
 
+        ////////////////////////////////////////////
+        // OPTIONAL
+        // Clear single category
+        addEventListenerToPills();
+        ////////////////////////////////////////////
+
         // TODO: MODULE_FILTERS
         // 1. Invoke saveFiltersToLocalStorage here
+        saveFiltersToLocalStorage(filters);
       }
 
       //executed when clear button is clicked on category filter dropdown
@@ -216,11 +236,39 @@
 
         // TODO: MODULE_FILTERS
         // 1. Invoke saveFiltersToLocalStorage here
+        saveFiltersToLocalStorage(filters);
       }
+
+      ////////////////////////////////////////////
+      // OPTIONAL
+      // Clear single category
+      function clearSingleCategory(event) {
+        document.getElementById("data").textContent = "";
+        document.getElementById("category-list").textContent = "";
+
+        const filterToRemove = event.target.textContent;
+        const index = filters["category"].indexOf(filterToRemove);
+        filters["category"].splice(index, 1);
+        generateFilterPillsAndUpdateDOM(filters);
+        let filteredAdventures = filterFunction(adventures, filters);
+        addAdventureToDOM(filteredAdventures);
+        addEventListenerToPills();
+
+        // TODO: MODULE_FILTERS
+        // 1. Invoke saveFiltersToLocalStorage here
+        saveFiltersToLocalStorage(filters);
+      }
+      ////////////////////////////////////////////
 
       //helper function
       function onlyUnique(value, index, self) {
         return self.indexOf(value) === index;
+      }
+      function addEventListenerToPills() {
+        const filterPills = document.getElementById("category-list");
+        Array.from(filterPills.children).forEach((child) => {
+          child.addEventListener("click", clearSingleCategory);
+        });
       }
 
       //registering module based functions in the DOM in order for them to work

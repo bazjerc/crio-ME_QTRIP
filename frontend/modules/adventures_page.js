@@ -142,7 +142,6 @@ function filterFunction(list, filters) {
   }
 
   // Place holder for functionality to work in the Stubs
-  console.log(list);
   return list;
 }
 

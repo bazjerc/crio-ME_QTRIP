@@ -2,26 +2,6 @@ import config from "../conf/index.js";
 
 const api = config.backendEndpoint;
 
-////////////////////////////////////////////
-// OPTIONAL
-// Add new adventure
-// !!!!!!!!!!!!!!!!! Does not work !!!!!!!!!!!!!!!!!!
-/* const buttonAddNew = document.getElementById("add-new");
-buttonAddNew.addEventListener("click", addNewAdventure);
-
-async function addNewAdventure() {
-  const city = getCityFromURL(window.location.search);
-  const data = { city: city };
-  const options = { method: "POST", body: JSON.stringify(data) };
-  try {
-    const responseData = await fetch(`${api}/adventures/new`, options); 
-    console.log(responseData);
-  } catch (error) {
-    console.log(error);
-  }
-} */
-////////////////////////////////////////////
-
 //Implementation to extract city from query params
 function getCityFromURL(search) {
   // TODO: MODULE_ADVENTURES
@@ -74,7 +54,7 @@ function addAdventureToDOM(adventures) {
                   class="mb-md-2 d-flex flex-column flex-md-row justify-content-between text-center"
                 >
                   <div class="mb-1 mb-md-0 fw-bold">${name}</div>
-                  <div>${currency} ${costPerHead}</div>
+                  <div>₹ ${costPerHead}</div>
                 </div>
                 <div
                   class="d-flex flex-column flex-md-row justify-content-between text-center"
@@ -158,7 +138,7 @@ function getFiltersFromLocalStorage() {
   // TODO: MODULE_FILTERS
   // 1. Get the filters from localStorage and return String read as an object
   const filters = JSON.parse(localStorage.getItem("filters"));
-  
+
   // Place holder for functionality to work in the Stubs
   return filters;
 }

@@ -143,6 +143,9 @@
         generateFilterPillsAndUpdateDOM,
       } from "../../modules/adventures_page.js";
 
+      import config from "../../conf/index.js";
+      const api = config.backendEndpoint;
+
       // Declaring global variable adventure
       let adventures;
 
@@ -170,6 +173,12 @@
 
         // Updates the DOM with filter pills if any
         generateFilterPillsAndUpdateDOM(filters);
+
+        ////////////////////////////////////////////
+        // OPTIONAL
+        // Clear single category
+        addEventListenerToPills();
+        ////////////////////////////////////////////
       })();
 
       //executed when onChange() is triggered on duration filter dropdown
@@ -259,6 +268,34 @@
         saveFiltersToLocalStorage(filters);
       }
       ////////////////////////////////////////////
+
+      ////////////////////////////////////////////
+      // OPTIONAL
+      // Add new adventure
+      const buttonAddNew = document.getElementById("add-new");
+      buttonAddNew.addEventListener("click", addNewAdventure);
+
+      async function addNewAdventure() {
+        const city = getCityFromURL(window.location.search);
+        const data = { city: city };
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+          },
+          body: JSON.stringify(data),
+        };
+        try {
+          const responseData = await fetch(`${api}/adventures/new`, options);
+          if (responseData.ok) {
+            window.location.reload();
+          } else {
+            console.log(response.text());
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
 
       //helper function
       function onlyUnique(value, index, self) {

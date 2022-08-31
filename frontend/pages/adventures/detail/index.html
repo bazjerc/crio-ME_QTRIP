@@ -120,12 +120,18 @@
             showBannerIfAlreadyReserved,
         } from "../../../modules/adventure_details_page.js";
         (async function () {
-            let adventureId = await getAdventureIdFromURL(window.location.search);
+            let adventureId = getAdventureIdFromURL(window.location.search);
             let adventureDetails = await fetchAdventureDetails(adventureId);
             addAdventureDetailsToDOM(adventureDetails);
             addBootstrapPhotoGallery(adventureDetails.images);
             conditionalRenderingOfReservationPanel(adventureDetails);
-            captureFormSubmit(adventureDetails);
+            // captureFormSubmit(adventureDetails);
+            /////////////////////////////////////////////////
+            document.forms.myForm.addEventListener("submit", function(e) {
+              e.preventDefault();
+              captureFormSubmit(adventureDetails);
+            })
+            /////////////////////////////////////////////////
             showBannerIfAlreadyReserved(adventureDetails);
             function onPersonsChange(event) {
                 calculateReservationCostAndUpdateDOM(

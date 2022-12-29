@@ -1,4 +1,4 @@
 
-const config = { backendEndpoint: "http://65.1.233.236:8082" };
+const config = { backendEndpoint: "https://crio-qtrip-api.onrender.com" };
 
 export default config;
